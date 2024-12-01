@@ -1,0 +1,84 @@
+<form [formGroup]="createPlayerForm">
+    <div class="p-grid p-fluid">
+      <!-- Codigo -->
+      <div class="p-col-12 p-2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-cog"></i></span>
+          <input type="text" pInputText placeholder="Codigo" formControlName="code">
+        </div>
+        <div *ngIf="createPlayerForm.get('code')?.touched && createPlayerForm.get('code')?.invalid" class="p-error">
+          <div *ngIf="createPlayerForm.get('code')?.hasError('required')">Codigo es requerido.</div>
+          <div *ngIf="createPlayerForm.get('code')?.hasError('pattern')">El codigo debe ser alfanumérico y de 10 caracteres.</div>
+        </div>
+      </div>
+      
+      <!-- Nombres -->
+      <div class="p-col-12 p-2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+          <input type="text" pInputText placeholder="Nombres" formControlName="names">
+        </div>
+        <div *ngIf="createPlayerForm.get('names')?.touched && createPlayerForm.get('names')?.invalid" class="p-error">
+          <div *ngIf="createPlayerForm.get('names')?.hasError('required')">Nombres son requeridos.</div>
+          <div *ngIf="createPlayerForm.get('names')?.hasError('maxlength')">El nombre no puede superar los 100 caracteres.</div>
+        </div>
+      </div>
+  
+      <!-- Camiseta -->
+      <div class="p-col-12 p-2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-cog"></i></span>
+          <input type="text" pInputText placeholder="Camiseta" formControlName="shirt">
+        </div>
+        <div *ngIf="createPlayerForm.get('shirt')?.touched && createPlayerForm.get('shirt')?.invalid" class="p-error">
+          <div *ngIf="createPlayerForm.get('shirt')?.hasError('minlength')">La camiseta debe tener 2 caracteres.</div>
+          <div *ngIf="createPlayerForm.get('shirt')?.hasError('maxlength')">La camiseta debe tener 2 caracteres.</div>
+        </div>
+      </div>
+
+      <!-- Selector de País -->
+      <div class="p-col-12 p-2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
+          <select pInputText formControlName="country" (change)="onCountryChange($event)">
+            <option value="" disabled>Seleccione un país</option>
+            <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+          </select>
+        </div>
+        <div *ngIf="createPlayerForm.get('country')?.touched && createPlayerForm.get('country')?.invalid" class="p-error">
+          <div *ngIf="createPlayerForm.get('country')?.hasError('required')">País es requerido.</div>
+        </div>
+      </div>
+
+      <!-- Selector de Equipo -->
+      <div class="p-col-12 p-2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-users"></i></span>
+          <select pInputText formControlName="team">
+            <option value="" disabled>Seleccione un equipo</option>
+            <option *ngFor="let team of teams" [value]="team">{{ team }}</option>
+          </select>
+        </div>
+        <div *ngIf="createPlayerForm.get('team')?.touched && createPlayerForm.get('team')?.invalid" class="p-error">
+          <div *ngIf="createPlayerForm.get('team')?.hasError('required')">Equipo es requerido.</div>
+        </div>
+      </div>
+  
+      <!-- Campeonatos -->
+      <div class="p-col-12 p-2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-flag"></i></span>
+          <input type="text" pInputText placeholder="Campeonatos" formControlName="cups">
+        </div>
+        <div *ngIf="createPlayerForm.get('cups')?.touched && createPlayerForm.get('cups')?.invalid" class="p-error">
+          <div *ngIf="createPlayerForm.get('cups')?.hasError('required')">El campo 'Campeonatos' es requerido.</div>
+        </div>
+      </div>
+    </div> 
+
+    <div class="d-flex justify-content-end">
+        <p-button icon="pi pi-times" label="Cancelar" styleClass="p-button-text" (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-check" label="Aceptar" styleClass="p-button-text" [disabled]="!createPlayerForm.valid" (click)="createPlayer()"></p-button>
+    </div>
+</form>
+  

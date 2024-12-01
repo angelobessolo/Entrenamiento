@@ -1,0 +1,33 @@
+<form [formGroup]="exerciseOneForm" class="card p-4" style="border-radius: 16px; background-color: #20262e26; min-height: 310px; width: 350px">
+  <div class="row">
+    <div>
+      <h5>1. MODULOS NUMEROS DE 4 DIGITOS</h5>
+    </div>
+
+    <div class="d-flex flex-column gap-1">
+      <label for="">Ingrese Numero de 4 Digitos</label>
+
+      <div class="d-flex flex-column gap-2 m-1 p-3 justify-content-between">
+        <div style="align-content: center; width: 100%;">
+          <input type="text" pInputText formControlName="numberInput" maxlength="4" style="width: 100%;" (input)="onInput($event)"  pattern="^[0-9]{1,4}$">
+          <div *ngIf="exerciseOneForm.touched && exerciseOneForm.invalid" class="p-error">
+            <div>Numero es requerido.</div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3 justify-content-end">
+          <button pButton pRipple type="button" label="Agregar" class="custome-button p-button-raised p-button-success p-button-text" (click)="addNumber()"></button> 
+          <button pButton pRipple type="button" label="Limpiar" class="custome-button-clean p-button-raised p-button-success p-button-text" (click)="cleanArray()"></button> 
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="col-12 p-2" style="    max-height: 350px; overflow-y: auto;">
+      <p *ngFor="let number of numbers">
+        {{ number.number }} -  {{ number.label }}
+      </p> 
+    </div>
+  </div>
+</form>
+  

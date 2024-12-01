@@ -1,0 +1,51 @@
+<div>
+    <div class="d-flex justify-content-end gap-1 mb-2">
+        <button pButton type="button" icon="pi pi-plus" class="p-button-raised p-button-rounded text-light" style="background-color: green; border: none;" (click)="showBasicDialog()"></button>        
+        <ng-container *ngIf="displayBasic">
+            <p-dialog header="Creación de Jugador" [(visible)]="displayBasic" [style]="{width: '70vw'}" (onHide)="removeBlurEffect()">
+                <app-create-player (playerCreated)="createPLayer($event)"></app-create-player>
+            </p-dialog>
+        </ng-container>
+        
+    </div>
+
+    <div style="max-height: 550px; overflow-y: auto;">
+        <p-table [value]="players" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombres</th>
+                    <th>Camiseta</th>
+                    <th>Equipo</th>
+                    <th>Campeonatos</th>
+                    <th>Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-player>
+                <tr>
+                    <td>{{player.code}}</td>
+                    <td>{{player.names}}</td>
+                    <td>{{player.shirt}}</td>
+                    <td>{{player.team}}</td>
+                    <!-- Mostrar el campo de campeonatos solo si showCups es verdadero -->
+                    <td *ngIf="player.showCups; else noCups">{{ player.cups }}</td>
+                    <!-- Bloque else si showCups es falso -->
+                    <ng-template #noCups>
+                        <td></td>
+                    </ng-template>
+                    <td>
+                        <button pButton pRipple type="button" label="Editar" class="p-button-raised p-button-warning p-button-text" (click)="editPlayer(player)"></button> 
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<ng-container *ngIf="showEdit">
+    <p-dialog p-dialog header="Actualización de Jugador" [(visible)]="showEdit" [style]="{width: '70vw'}" (onHide)="removeBlurEffect()">
+        <app-edit-player [player]="playerA" (editPlayerEvent)="editPlayerEvent($event)"></app-edit-player>
+    </p-dialog>
+</ng-container>
+
+<p-toast></p-toast>

@@ -1,0 +1,36 @@
+<form [formGroup]="exerciseTwoForm" class="card p-4" style="border-radius: 16px; background-color: #20262e26; min-height: 310px; width: 350px">
+  <div class="row">
+  
+    <div class="d-flex flex-column gap-1 mb-4">
+      <h5>2. CADENAS  ANAGRAMA</h5>
+
+      <div class="col-12">
+        <label for="">Ingrese La Primera Cadena</label>
+        <div style="align-content: center;">
+          <input type="text" pInputText formControlName="stringA" [pattern]="'^[a-zA-ZáéíóúÁÉÍÓÚüÜ ]+$'" style="width: 100%;">
+        </div>      
+      </div>
+
+      <div class="col-12">
+        <label for="">Ingrese La Segunda Cadena</label>
+        <div style="align-content: center;">
+          <input type="text" pInputText formControlName="stringB" [pattern]="'^[a-zA-ZáéíóúÁÉÍÓÚüÜ ]+$'" style="width: 100%;">
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 justify-content-end">
+        <button pButton pRipple type="button" label="Validar" class="custome-button p-button-raised p-button-success p-button-text" (click)="checkAnagram()"></button> 
+        <button pButton pRipple type="button" label="Limpiar" class="custome-button-clean p-button-raised p-button-success p-button-text" (click)="cleanArray()"></button> 
+
+      </div>
+
+    </div>
+
+    <div>
+      <p >{{result}}</p>
+    </div>
+    
+    
+  </div>
+</form>
+  
